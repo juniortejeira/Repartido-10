@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <title>Document</title>
+</head>
+<body>
+
+    <!-- como esta creando las tablas
+    <table>
+        <th>
+        <tr>
+            <td>Mateo</td> <td>5</td> <td>Gato</td> <td>Le gusta comer budín</td>
+        </tr>
+        <tr>
+            <td>Mateo</td> <td>5</td> <td>Gato</td> <td>Le gusta comer budín</td>
+        </tr>
+        <tr>
+            <td>Mateo</td> <td>5</td> <td>Gato</td> <td>Le gusta comer budín</td>
+        </tr>
+        <tr>
+            <td>Mateo</td> <td>5</td> <td>Gato</td> <td>Le gusta comer budín</td>
+        </tr>
+        <tr>
+            <td>Mateo</td> <td>5</td> <td>Gato</td> <td>Le gusta comer budín</td>
+        </tr>
+    </table> -->
+
+    <h1 class="h1">Hola mundo</h1>
+
+    <table id="table_Mostrar">
+        <tr>
+            <th>NAME</th>
+            <th>AGE</th>
+            <th>TYPE</th>
+            <th>CHARACTERISTICS</th>
+        </tr>
+    </table>
+    <div class="formulario">
+        <input type="text" class="input" id="name" placeholder="Ingresa nombre">
+        <input type="number" class="input" id="age" placeholder="Ingresa edad">
+        <input type="text" class="input" id="type" placeholder="Tipo">
+        <input type="text" class="input" id="characteristics" placeholder="Caracterisitca">
+        <button type="submit" class="btn">Agregar a la lista</button>
+    </div>
+   
+</body>
+<script>
+        const http = "/search"
+        const insertar  = document.getElementById("table_Mostrar")
+    async function mostrar(){
+        const mostrarFetch = await fetch(http);
+        const data = await mostrarFetch.json()
+
+        data.forEach(e =>{
+            let tr = document.createElement("tr")
+            let tdname = document.createElement("td")
+            let tdage = document.createElement("td")
+            let tdtype = document.createElement("td")
+            let tdcarc = document.createElement("td")
+
+             tdname.innerHTML = e.Name
+            tdage.innerHTML = e.Age
+            tdtype.innerHTML = e.Tipe
+            tdcarc.innerHTML = e.features
+
+            insertar.appendChild(tr)
+            tr.appendChild(tdname)
+            tr.appendChild(tdage)
+            tr.appendChild(tdtype)
+            tr.appendChild(tdcarc) 
+            
+        })
+    }
+    mostrar()
+
+    const inputName = document.querySelector('#name')
+    const inputAge = document.querySelector('#age')
+    const inputTipo = document.querySelector('#type')
+    const inputCaracteristicas = document.querySelector('#characteristics')
+    const button = document.querySelector('button')
+
+    button.addEventListener('click', (e) => {
+        const Nombre = inputName.value
+        const Edad = inputAge.value
+        const Tipo = inputTipo.value
+        const Caracteristicas = inputCaracteristicas.value
+
+        fetch('/create', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                Nombre,
+                Edad,
+                Tipo,
+                Caracteristicas,
+            }),
+
+        })
+    })
+
+
+
+
+
+
+
+
+
+
+
+/* 
+    //seleccionamos los id 
+    const name = document.getElementById("name")
+    const age = document.getElementById("age")
+    const type = document.getElementById("type")
+    const Characteristics = document.getElementById("characteristics")
+    const button = document.getElementById("btn")
+
+    button.addEventListener('click', (e) => {
+        const nombre = name.value
+        const edad = age.value
+        const tipo = type.value
+        const caracteristica = Characteristics.value
+
+        fetch('/create', {
+            method: 'POST',
+            headers:{
+            'Content-Type': 'application/json',
+        },//estamos enviando un string de json 
+        body:JSON.stringify({
+            nombre,
+            edad,
+            tipo,
+            caracteristica
+        })
+    })
+    })
+ */
+</script>
+
+</html>
+
