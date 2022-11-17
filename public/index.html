@@ -84,10 +84,10 @@
     const button = document.querySelector('button')
 
     button.addEventListener('click', (e) => {
-        const Nombre = inputName.value
-        const Edad = inputAge.value
-        const Tipo = inputTipo.value
-        const Caracteristicas = inputCaracteristicas.value
+        const Name = inputName.value
+        const Age = inputAge.value
+        const Tipe = inputTipo.value
+        const features = inputCaracteristicas.value
 
         fetch('/create', {
             method: 'POST',
@@ -95,10 +95,10 @@
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                Nombre,
-                Edad,
-                Tipo,
-                Caracteristicas,
+                Name,
+                Age,
+                Tipe,
+                features,
             }),
 
         })
